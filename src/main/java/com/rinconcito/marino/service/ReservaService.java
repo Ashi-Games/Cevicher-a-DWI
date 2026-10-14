@@ -82,6 +82,9 @@ public class ReservaService {
     @Transactional
     public ReservaResponse cambiarEstado(Long id, EstadoReserva estado) {
         Reserva reserva = buscar(id);
+        if (reserva.getEstado() == EstadoReserva.EXPIRADO && estado == EstadoReserva.CONFIRMADO) {
+            throw new ReglaNegocioException("Una reserva expirada no puede confirmarse");
+        }
         reserva.setEstado(estado);
         return ReservaResponse.from(reservaRepository.save(reserva));
     }
