@@ -1,5 +1,10 @@
 package com.rinconcito.marino.controller;
 
+import com.rinconcito.marino.security.JwtAuthenticationFilter;
+import com.rinconcito.marino.security.JwtUtil;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.test.context.support.WithMockUser;
+
 import com.rinconcito.marino.config.SecurityConfig;
 import com.rinconcito.marino.dto.ReservaCreadaResponse;
 import com.rinconcito.marino.dto.ReservaRequest;
@@ -31,7 +36,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(ReservaController.class)
-@Import(SecurityConfig.class)
+@Import({SecurityConfig.class, JwtAuthenticationFilter.class})
+@WithMockUser(roles = "ADMIN")
 class ReservaControllerTest {
 
     private static final String RESERVA_VALIDA = """
@@ -45,6 +51,12 @@ class ReservaControllerTest {
 
     @MockitoBean
     private ReservaService reservaService;
+
+    @MockitoBean
+    private JwtUtil jwtUtil;
+
+    @MockitoBean
+    private UserDetailsService userDetailsService;
 
     private ReservaResponse reservaResponse(EstadoReserva estado) {
         return new ReservaResponse(1L, "Eidan", "Prueba", "12345678", 25, "prueba@test.com",

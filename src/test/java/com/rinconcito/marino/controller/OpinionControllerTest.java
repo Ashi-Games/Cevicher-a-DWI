@@ -1,5 +1,8 @@
 package com.rinconcito.marino.controller;
 
+import com.rinconcito.marino.security.JwtAuthenticationFilter;
+import com.rinconcito.marino.security.JwtUtil;
+
 import com.rinconcito.marino.config.SecurityConfig;
 import com.rinconcito.marino.dto.OpinionRequest;
 import com.rinconcito.marino.dto.OpinionResponse;
@@ -12,6 +15,8 @@ import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.test.context.support.WithMockUser;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -26,8 +31,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+
 @WebMvcTest(OpinionController.class)
-@Import(SecurityConfig.class)
+@Import({SecurityConfig.class, JwtAuthenticationFilter.class})
+@WithMockUser(roles = "ADMIN")
 class OpinionControllerTest {
 
     @Autowired
@@ -35,6 +42,12 @@ class OpinionControllerTest {
 
     @MockitoBean
     private OpinionService opinionService;
+
+    @MockitoBean
+    private JwtUtil jwtUtil;
+
+    @MockitoBean
+    private UserDetailsService userDetailsService;
 
     private OpinionResponse opinionResponse() {
         return new OpinionResponse(1L, "Eidan", "eidan@test.com", "Muy rico el ceviche",
