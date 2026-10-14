@@ -6,10 +6,11 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum EstadoReserva {
-    PENDIENTE("Pendiente"),
-    CONFIRMADO("Confirmado"),
-    RECHAZADO("Rechazado"),
-    EXPIRADO("Expirado");
+    PENDIENTE("Pendiente", 1),
+    CONFIRMADO("Confirmado", 2),
+    RECHAZADO("Rechazado", 3),
+    EXPIRADO("Expirado", 4);
 
     private final String etiqueta;
+    private final int orden;
 }
