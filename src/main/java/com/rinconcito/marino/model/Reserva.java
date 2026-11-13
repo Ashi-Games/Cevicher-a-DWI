@@ -8,6 +8,8 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "reservas")
@@ -73,11 +75,20 @@ public class Reserva {
     @Column(name = "fecha_registro", nullable = false, updatable = false)
     private LocalDateTime fechaRegistro;
 
+    @ManyToMany
+    @JoinTable(
+            name = "reserva_mesa",
+            joinColumns = @JoinColumn(name = "reserva_id"),
+            inverseJoinColumns = @JoinColumn(name = "mesa_id")
+    )
+    private Set<Mesa> mesas = new HashSet<>();
+
     @PrePersist
     void prePersist() {
         if (fechaRegistro == null) {
             fechaRegistro = LocalDateTime.now();
         }
+
         if (estado == null) {
             estado = EstadoReserva.PENDIENTE;
         }

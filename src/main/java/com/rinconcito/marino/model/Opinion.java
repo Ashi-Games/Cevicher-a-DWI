@@ -38,10 +38,15 @@ public class Opinion {
     @Column(name = "fecha_registro", nullable = false, updatable = false)
     private LocalDateTime fechaRegistro;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "reserva_id")
+    private Reserva reserva;
+
     @PrePersist
     void prePersist() {
         if (fechaRegistro == null) {
             fechaRegistro = LocalDateTime.now();
         }
     }
+
 }
