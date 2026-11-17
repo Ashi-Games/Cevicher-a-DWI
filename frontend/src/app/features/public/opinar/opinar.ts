@@ -40,7 +40,7 @@ export class Opinar {
       .pipe(finalize(() => this.enviando.set(false)))
       .subscribe({
         next: () => {
-          this.toast.exito('¡Gracias por tu opinion!');
+          this.toast.exito('¡Gracias por tu opinión!');
           this.enviado.set(true);
           this.form.reset();
         },

@@ -14,7 +14,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   }
   const roles = route.data?.['roles'] as Rol[] | undefined;
   if (roles && !auth.tieneRol(roles)) {
-    inject(ToastService).error('Esta seccion es solo para administradores.');
+    inject(ToastService).error('Esta sección es solo para administradores.');
     return router.createUrlTree(['/admin']);
   }
   return true;

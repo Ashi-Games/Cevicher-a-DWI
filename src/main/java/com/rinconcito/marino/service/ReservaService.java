@@ -141,7 +141,7 @@ public class ReservaService {
                 + ", tu reserva en Rinconcito Marino para " + r.getPersonas()
                 + " persona(s) el " + r.getFecha().format(FORMATO_FECHA)
                 + " a las " + r.getHora().format(FORMATO_HORA)
-                + " esta pendiente. Para confirmarla, coordina el adelanto de S/ " + ADELANTO + ".";
+                + " está pendiente. Para confirmarla, coordina el adelanto de S/ " + ADELANTO + ".";
         return "https://wa.me/" + whatsappNumber + "?text="
                 + URLEncoder.encode(mensaje, StandardCharsets.UTF_8);
     }

@@ -1,0 +1,73 @@
+erDiagram
+    usuarios_admin {
+        BIGINT id PK
+        VARCHAR usuario UK
+        VARCHAR password
+        VARCHAR rol "ADMIN | EMPLEADO"
+    }
+    reservas {
+        BIGINT id PK
+        VARCHAR nombres
+        VARCHAR apellidos
+        CHAR dni
+        INT edad
+        VARCHAR email
+        CHAR telefono
+        INT personas
+        DATE fecha
+        TIME hora
+        VARCHAR estado "PENDIENTE | CONFIRMADO | RECHAZADO | EXPIRADO"
+        DATETIME fecha_registro
+    }
+    mesas {
+        BIGINT id PK
+        INT numero UK
+        INT capacidad
+        VARCHAR zona
+        BIT activa
+    }
+    reserva_mesa {
+        BIGINT reserva_id PK,FK
+        BIGINT mesa_id PK,FK
+    }
+    pagos_adelanto {
+        BIGINT id PK
+        BIGINT reserva_id FK,UK
+        DECIMAL monto
+        VARCHAR metodo "YAPE | PLIN | TRANSFERENCIA | EFECTIVO"
+        VARCHAR estado "PENDIENTE | PAGADO | RECHAZADO"
+        VARCHAR referencia
+        DATETIME fecha_pago
+    }
+    atenciones {
+        BIGINT id PK
+        BIGINT reserva_id FK,UK
+        BIGINT usuario_id FK
+        DATETIME hora_llegada
+        DATETIME hora_salida
+        INT personas_atendidas
+        VARCHAR observaciones
+    }
+    historial_estado_reserva {
+        BIGINT id PK
+        BIGINT reserva_id FK
+        BIGINT usuario_id FK
+        VARCHAR estado_anterior
+        VARCHAR estado_nuevo
+        VARCHAR motivo
+        DATETIME fecha_cambio
+    }
+    opiniones {
+        BIGINT id PK
+        VARCHAR nombres
+        VARCHAR correo
+        VARCHAR comentario
+        DATETIME fecha_registro
+    }
+    reservas ||--o{ reserva_mesa : "ocupa"
+    mesas ||--o{ reserva_mesa : "asignada en"
+    reservas ||--o| pagos_adelanto : "tiene"
+    reservas ||--o| atenciones : "genera"
+    usuarios_admin ||--o{ atenciones : "atiende"
+    reservas ||--o{ historial_estado_reserva : "registra"
+    usuarios_admin |o--o{ historial_estado_reserva : "realiza"

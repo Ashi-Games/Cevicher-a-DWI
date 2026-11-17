@@ -127,11 +127,11 @@ class SeguridadEndpointsTest {
     @Test
     void login_conCredencialesInvalidas_devuelve401() throws Exception {
         when(authenticationService.autenticar(any(LoginRequest.class)))
-                .thenThrow(new BadCredentialsException("Credenciales invalidas"));
+                .thenThrow(new BadCredentialsException("Credenciales inválidas"));
 
         mockMvc.perform(post("/api/auth/login").contentType(MediaType.APPLICATION_JSON).content(LOGIN))
                 .andExpect(status().isUnauthorized())
-                .andExpect(jsonPath("$.mensaje").value("Credenciales invalidas"));
+                .andExpect(jsonPath("$.mensaje").value("Credenciales inválidas"));
     }
 
     @Test

@@ -9,7 +9,7 @@ export const routes: Routes = [
     path: '',
     component: PublicLayout,
     children: [
-      { path: '', component: Inicio, title: 'Rinconcito Marino | Cevicheria' },
+      { path: '', component: Inicio, title: 'Rinconcito Marino | Cevichería' },
       {
         path: 'carta',
         loadComponent: () => import('./features/public/carta/carta').then((m) => m.Carta),
@@ -23,7 +23,7 @@ export const routes: Routes = [
       {
         path: 'opinar',
         loadComponent: () => import('./features/public/opinar/opinar').then((m) => m.Opinar),
-        title: 'Tu opinion | Rinconcito Marino',
+        title: 'Tu opinión | Rinconcito Marino',
       },
     ],
   },

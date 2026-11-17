@@ -15,26 +15,26 @@ public record ReservaRequest(
         String apellidos,
 
         @NotBlank(message = "El DNI es obligatorio")
-        @Pattern(regexp = "\\d{8}", message = "El DNI debe tener 8 digitos numericos")
+        @Pattern(regexp = "\\d{8}", message = "El DNI debe tener 8 dígitos numéricos")
         String dni,
 
         @NotNull(message = "La edad es obligatoria")
         @Min(value = 18, message = "Debes ser mayor de edad para reservar")
-        @Max(value = 120, message = "La edad ingresada no es valida")
+        @Max(value = 120, message = "La edad ingresada no es válida")
         Integer edad,
 
         @NotBlank(message = "El correo es obligatorio")
-        @Email(message = "Ingresa un correo valido")
+        @Email(message = "Ingresa un correo válido")
         @Size(max = 120, message = "El correo no debe superar 120 caracteres")
         String email,
 
-        @NotBlank(message = "El telefono es obligatorio")
-        @Pattern(regexp = "\\d{9}", message = "El telefono debe tener 9 digitos")
+        @NotBlank(message = "El teléfono es obligatorio")
+        @Pattern(regexp = "\\d{9}", message = "El teléfono debe tener 9 dígitos")
         String telefono,
 
         @NotNull(message = "La cantidad de personas es obligatoria")
         @Min(value = 1, message = "Debe reservar al menos una persona")
-        @Max(value = 20, message = "Para mas de 20 personas contactanos por WhatsApp")
+        @Max(value = 20, message = "Para más de 20 personas contáctanos por WhatsApp")
         Integer personas,
 
         @NotNull(message = "La fecha es obligatoria")

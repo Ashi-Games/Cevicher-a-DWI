@@ -11,8 +11,8 @@ import { ReservaCreada } from '../../../core/models';
       <i class="bi bi-check-circle-fill text-success display-4"></i>
       <h2 class="h3 mt-3">¡Reserva registrada!</h2>
       <p class="text-secondary">
-        Tu reserva <strong>#{{ datos().reserva.id }}</strong> esta <strong>pendiente</strong>.
-        Envia el adelanto de <strong>S/ 20</strong> por WhatsApp en los proximos 30 minutos para confirmarla.
+        Tu reserva <strong>#{{ datos().reserva.id }}</strong> está <strong>pendiente</strong>.
+        Envía el adelanto de <strong>S/ 20</strong> por WhatsApp en los próximos 30 minutos para confirmarla.
       </p>
       <ul class="list-group list-group-flush text-start my-3">
         <li class="list-group-item d-flex justify-content-between"><span>Nombre</span>

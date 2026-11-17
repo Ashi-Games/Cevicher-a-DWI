@@ -22,7 +22,7 @@ public class UsuarioAdmin {
     @Column(nullable = false, unique = true, length = 40)
     private String usuario;
 
-    @NotBlank(message = "La contrasena es obligatoria")
+    @NotBlank(message = "La contraseña es obligatoria")
     @Column(nullable = false, length = 255)
     private String password;
 

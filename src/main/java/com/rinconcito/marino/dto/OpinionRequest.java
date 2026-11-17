@@ -10,7 +10,7 @@ public record OpinionRequest(
         String nombres,
 
         @NotBlank(message = "El correo es obligatorio")
-        @Email(message = "Ingresa un correo valido")
+        @Email(message = "Ingresa un correo válido")
         @Size(max = 120, message = "El correo no debe superar 120 caracteres")
         String correo,
 

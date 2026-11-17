@@ -22,7 +22,7 @@ public class GlobalExceptionHandler {
         Map<String, String> errores = new LinkedHashMap<>();
         ex.getBindingResult().getFieldErrors()
                 .forEach(e -> errores.putIfAbsent(e.getField(), e.getDefaultMessage()));
-        return respuesta(HttpStatus.BAD_REQUEST, "Datos invalidos", req, errores);
+        return respuesta(HttpStatus.BAD_REQUEST, "Datos inválidos", req, errores);
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
@@ -34,7 +34,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<ApiError> tipoInvalido(MethodArgumentTypeMismatchException ex, HttpServletRequest req) {
         return respuesta(HttpStatus.BAD_REQUEST,
-                "El parametro '" + ex.getName() + "' tiene un valor invalido", req, Map.of());
+                "El parametro '" + ex.getName() + "' tiene un valor inválido", req, Map.of());
     }
 
     @ExceptionHandler(RecursoNoEncontradoException.class)
@@ -60,6 +60,6 @@ public class GlobalExceptionHandler {
     }
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<ApiError> credencialesInvalidas(BadCredentialsException ex, HttpServletRequest req) {
-        return respuesta(HttpStatus.UNAUTHORIZED, "Credenciales invalidas", req, Map.of());
+        return respuesta(HttpStatus.UNAUTHORIZED, "Credenciales inválidas", req, Map.of());
     }
 }

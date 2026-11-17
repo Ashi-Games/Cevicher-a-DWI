@@ -3,12 +3,12 @@ import { AbstractControl } from '@angular/forms';
 
 const MENSAJES: Record<string, (e: any) => string> = {
   required: () => 'Este campo es obligatorio',
-  email: () => 'Ingresa un correo valido',
-  min: (e) => `El valor minimo es ${e.min}`,
-  max: (e) => `El valor maximo es ${e.max}`,
+  email: () => 'Ingresa un correo válido',
+  min: (e) => `El valor mínimo es ${e.min}`,
+  max: (e) => `El valor máximo es ${e.max}`,
   minlength: (e) => `Debe tener al menos ${e.requiredLength} caracteres`,
   maxlength: (e) => `No debe superar ${e.requiredLength} caracteres`,
-  pattern: () => 'Formato no valido',
+  pattern: () => 'Formato no válido',
   servidor: (e) => e,
 };
 
@@ -26,6 +26,6 @@ export class FieldError {
     const c = this.control();
     if (!c || !c.errors || !(c.touched || c.dirty)) return null;
     const [clave, valor] = Object.entries(c.errors)[0];
-    return this.mensajes()[clave] ?? MENSAJES[clave]?.(valor) ?? 'Valor no valido';
+    return this.mensajes()[clave] ?? MENSAJES[clave]?.(valor) ?? 'Valor no válido';
   }
 }

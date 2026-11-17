@@ -22,7 +22,7 @@ public class RestAuthHandlers implements AuthenticationEntryPoint, AccessDeniedH
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response,
                        AccessDeniedException ex) throws IOException {
-        escribir(response, HttpStatus.FORBIDDEN, "No tienes permisos para realizar esta accion");
+        escribir(response, HttpStatus.FORBIDDEN, "No tienes permisos para realizar esta acción");
     }
 
     private void escribir(HttpServletResponse response, HttpStatus status, String mensaje) throws IOException {

@@ -6,8 +6,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public record MesaRequest(
-        @NotNull(message = "El numero de mesa es obligatorio")
-        @Min(value = 1, message = "El numero de mesa debe ser mayor que cero")
+        @NotNull(message = "El número de mesa es obligatorio")
+        @Min(value = 1, message = "El número de mesa debe ser mayor que cero")
         Integer numero,
 
         @NotNull(message = "La capacidad es obligatoria")

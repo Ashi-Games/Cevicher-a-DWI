@@ -23,10 +23,10 @@ public class AuthenticationService {
     @Transactional(readOnly = true)
     public AuthTokenResponse autenticar(LoginRequest request) {
         UsuarioAdmin usuario = usuarioAdminRepository.findByUsuario(request.usuario())
-                .orElseThrow(() -> new BadCredentialsException("Credenciales invalidas"));
+                .orElseThrow(() -> new BadCredentialsException("Credenciales inválidas"));
 
         if (!passwordEncoder.matches(request.password(), usuario.getPassword())) {
-            throw new BadCredentialsException("Credenciales invalidas");
+            throw new BadCredentialsException("Credenciales inválidas");
         }
 
         Instant expiraEn = jwtUtil.calcularExpiracion();

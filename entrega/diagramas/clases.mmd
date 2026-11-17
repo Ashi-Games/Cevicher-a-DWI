@@ -1,0 +1,95 @@
+classDiagram
+    direction LR
+    class Reserva {
+        -Long id
+        -String nombres
+        -String apellidos
+        -String dni
+        -Integer edad
+        -String email
+        -String telefono
+        -Integer personas
+        -LocalDate fecha
+        -LocalTime hora
+        -EstadoReserva estado
+        -LocalDateTime fechaRegistro
+        -Set~Mesa~ mesas
+        ~prePersist() void
+    }
+    class Mesa {
+        -Long id
+        -Integer numero
+        -Integer capacidad
+        -String zona
+        -boolean activa
+    }
+    class PagoAdelanto {
+        -Long id
+        -BigDecimal monto
+        -MetodoPago metodo
+        -EstadoPago estado
+        -String referencia
+        -LocalDateTime fechaPago
+    }
+    class Atencion {
+        -Long id
+        -LocalDateTime horaLlegada
+        -LocalDateTime horaSalida
+        -Integer personasAtendidas
+        -String observaciones
+    }
+    class HistorialEstadoReserva {
+        -Long id
+        -EstadoReserva estadoAnterior
+        -EstadoReserva estadoNuevo
+        -String motivo
+        -LocalDateTime fechaCambio
+    }
+    class UsuarioAdmin {
+        -Long id
+        -String usuario
+        -String password
+        -RolUsuario rol
+    }
+    class Opinion {
+        -Long id
+        -String nombres
+        -String correo
+        -String comentario
+        -LocalDateTime fechaRegistro
+    }
+    class EstadoReserva {
+        <<enumeration>>
+        PENDIENTE
+        CONFIRMADO
+        RECHAZADO
+        EXPIRADO
+    }
+    class EstadoPago {
+        <<enumeration>>
+        PENDIENTE
+        PAGADO
+        RECHAZADO
+    }
+    class MetodoPago {
+        <<enumeration>>
+        YAPE
+        PLIN
+        TRANSFERENCIA
+        EFECTIVO
+    }
+    class RolUsuario {
+        <<enumeration>>
+        ADMIN
+        EMPLEADO
+    }
+    Reserva "*" --> "*" Mesa
+    PagoAdelanto "0..1" --> "1" Reserva
+    Atencion "0..1" --> "1" Reserva
+    Atencion "*" --> "1" UsuarioAdmin
+    HistorialEstadoReserva "*" --> "1" Reserva
+    HistorialEstadoReserva "*" --> "0..1" UsuarioAdmin
+    Reserva ..> EstadoReserva
+    PagoAdelanto ..> EstadoPago
+    PagoAdelanto ..> MetodoPago
+    UsuarioAdmin ..> RolUsuario

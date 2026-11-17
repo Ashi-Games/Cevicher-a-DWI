@@ -22,7 +22,7 @@ export class Mesas implements OnInit {
   protected readonly form = this.fb.nonNullable.group({
     numero: [1, [Validators.required, Validators.min(1)]],
     capacidad: [4, [Validators.required, Validators.min(1), Validators.max(20)]],
-    zona: ['Salon', Validators.maxLength(30)],
+    zona: ['Salón', Validators.maxLength(30)],
     activa: [true],
   });
 
@@ -44,7 +44,7 @@ export class Mesas implements OnInit {
   protected nueva(): void {
     this.editando.set(null);
     const siguiente = Math.max(0, ...this.mesas().map((m) => m.numero)) + 1;
-    this.form.reset({ numero: siguiente, capacidad: 4, zona: 'Salon', activa: true });
+    this.form.reset({ numero: siguiente, capacidad: 4, zona: 'Salón', activa: true });
   }
 
   protected editar(m: Mesa): void {

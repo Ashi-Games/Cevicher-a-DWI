@@ -1,0 +1,16 @@
+flowchart LR
+    U(["Cliente / Personal<br/>Navegador desktop y móvil"]) --> A
+    subgraph A["Frontend Angular 20"]
+        direction TB
+        A1["Componentes + Router"] --> A2["Servicios HttpClient"]
+        A2 --> A3["Interceptores<br/>JWT + errores"]
+    end
+    A3 -->|"HTTP/JSON REST<br/>Authorization: Bearer"| B
+    subgraph B["Backend Spring Boot 4"]
+        direction TB
+        B0["Spring Security<br/>Filtro JWT + CORS"] --> B1["Controller"]
+        B1 --> B2["Service"]
+        B2 --> B3["Repository JPA"]
+    end
+    B3 -->|"JDBC / Hibernate"| DB[("MySQL 8<br/>rinconcito_marino")]
+    B2 -.->|"enlace wa.me"| W(["WhatsApp"])

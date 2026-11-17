@@ -6,7 +6,7 @@
         <h2 class="h6 fw-bold text-primary">{{ editando() ? 'Editar mesa ' + editando()!.numero : 'Nueva mesa' }}</h2>
         <div class="row g-2">
           <div class="col-6">
-            <label class="form-label small" for="numero">Numero</label>
+            <label class="form-label small" for="numero">Número</label>
             <input id="numero" type="number" class="form-control" formControlName="numero" [class.is-invalid]="invalido('numero')">
             <app-field-error [control]="form.get('numero')" />
           </div>
@@ -18,7 +18,7 @@
           <div class="col-12">
             <label class="form-label small" for="zona">Zona</label>
             <input id="zona" class="form-control" formControlName="zona" list="zonas">
-            <datalist id="zonas"><option value="Salon"></option><option value="Terraza"></option><option value="Segundo piso"></option></datalist>
+            <datalist id="zonas"><option value="Salón"></option><option value="Terraza"></option><option value="Segundo piso"></option></datalist>
           </div>
           <div class="col-12 form-check form-switch ms-2">
             <input id="activa" class="form-check-input" type="checkbox" formControlName="activa">

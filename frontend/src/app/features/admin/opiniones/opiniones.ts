@@ -34,10 +34,10 @@ export class Opiniones implements OnInit {
   }
 
   protected eliminar(o: Opinion): void {
-    if (!confirm(`¿Eliminar la opinion de ${o.nombres}?`)) return;
+    if (!confirm(`¿Eliminar la opinión de ${o.nombres}?`)) return;
     this.opinionService.eliminar(o.id).subscribe(() => {
       this.opiniones.update((l) => l.filter((x) => x.id !== o.id));
-      this.toast.exito('Opinion eliminada');
+      this.toast.exito('Opinión eliminada');
     });
   }
 }

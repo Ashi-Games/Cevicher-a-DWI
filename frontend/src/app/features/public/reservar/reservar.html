@@ -13,7 +13,7 @@
         <ul class="list-unstyled small">
           <li class="mb-2"><i class="bi bi-cash-coin text-primary me-2"></i>Adelanto de S/ 20 (se descuenta de tu consumo)</li>
           <li class="mb-2"><i class="bi bi-hourglass-split text-primary me-2"></i>Sin adelanto en 30 minutos, la reserva expira</li>
-          <li class="mb-2"><i class="bi bi-people text-primary me-2"></i>Grupos de mas de 20 personas: escribenos por WhatsApp</li>
+          <li class="mb-2"><i class="bi bi-people text-primary me-2"></i>Grupos de más de 20 personas: escríbenos por WhatsApp</li>
         </ul>
       </div>
 
@@ -33,7 +33,7 @@
             <div class="col-6 col-md-4">
               <label class="form-label" for="dni">DNI</label>
               <input id="dni" class="form-control" formControlName="dni" inputmode="numeric" maxlength="8" [class.is-invalid]="invalido('dni')">
-              <app-field-error [control]="form.get('dni')" [mensajes]="{ pattern: 'El DNI debe tener 8 digitos' }" />
+              <app-field-error [control]="form.get('dni')" [mensajes]="{ pattern: 'El DNI debe tener 8 dígitos' }" />
             </div>
             <div class="col-6 col-md-2">
               <label class="form-label" for="edad">Edad</label>
@@ -43,7 +43,7 @@
             <div class="col-md-6">
               <label class="form-label" for="telefono">Celular</label>
               <input id="telefono" type="tel" class="form-control" formControlName="telefono" inputmode="numeric" maxlength="9" [class.is-invalid]="invalido('telefono')">
-              <app-field-error [control]="form.get('telefono')" [mensajes]="{ pattern: 'El celular debe tener 9 digitos' }" />
+              <app-field-error [control]="form.get('telefono')" [mensajes]="{ pattern: 'El celular debe tener 9 dígitos' }" />
             </div>
             <div class="col-12">
               <label class="form-label" for="email">Correo</label>
@@ -66,7 +66,7 @@
             <div class="col-6 col-md-4">
               <label class="form-label" for="personas">Personas</label>
               <input id="personas" type="number" class="form-control" formControlName="personas" min="1" max="20" [class.is-invalid]="invalido('personas')">
-              <app-field-error [control]="form.get('personas')" [mensajes]="{ max: 'Mas de 20 personas: contactanos por WhatsApp' }" />
+              <app-field-error [control]="form.get('personas')" [mensajes]="{ max: 'Más de 20 personas: contáctanos por WhatsApp' }" />
             </div>
             @if (form.hasError('fechaPasada') && form.get('hora')?.touched) {
               <div class="col-12"><div class="alert alert-warning py-2 mb-0">La fecha y hora elegidas ya pasaron.</div></div>

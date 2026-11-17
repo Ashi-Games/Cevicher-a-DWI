@@ -59,10 +59,10 @@ public class GestionReservaService {
         int capacidad = 0;
         for (Mesa m : mesas) {
             if (!m.isActiva()) {
-                throw new ReglaNegocioException("La mesa " + m.getNumero() + " no esta activa");
+                throw new ReglaNegocioException("La mesa " + m.getNumero() + " no está activa");
             }
             if (reservaRepository.mesaOcupada(m.getId(), r.getFecha(), r.getHora(), ACTIVAS, r.getId())) {
-                throw new ReglaNegocioException("La mesa " + m.getNumero() + " ya esta asignada a esa fecha y hora");
+                throw new ReglaNegocioException("La mesa " + m.getNumero() + " ya está asignada a esa fecha y hora");
             }
             capacidad += m.getCapacidad();
         }

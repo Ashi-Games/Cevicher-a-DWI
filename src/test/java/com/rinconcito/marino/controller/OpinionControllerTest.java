@@ -76,7 +76,7 @@ class OpinionControllerTest {
                                 {"nombres":"","correo":"malo","comentario":"hi"}
                                 """))
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.mensaje").value("Datos invalidos"))
+                .andExpect(jsonPath("$.mensaje").value("Datos inválidos"))
                 .andExpect(jsonPath("$.errores.nombres").exists())
                 .andExpect(jsonPath("$.errores.correo").exists())
                 .andExpect(jsonPath("$.errores.comentario").exists());

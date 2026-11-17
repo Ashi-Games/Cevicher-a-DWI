@@ -17,8 +17,8 @@ public class Mesa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "El numero de mesa es obligatorio")
-    @Min(value = 1, message = "El numero de mesa debe ser mayor que cero")
+    @NotNull(message = "El número de mesa es obligatorio")
+    @Min(value = 1, message = "El número de mesa debe ser mayor que cero")
     @Column(nullable = false, unique = true)
     private Integer numero;
 

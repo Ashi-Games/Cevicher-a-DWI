@@ -1,0 +1,23 @@
+flowchart LR
+    subgraph PUB["Sitio público"]
+        I["/ Inicio"] --> C["/carta Carta"]
+        I --> R["/reservar Reservar"]
+        I --> O["/opinar Opinar"]
+        C --> R
+        R --> RS["Resumen de reserva"]
+        RS -->|"Confirmar"| WA(["WhatsApp: adelanto S/ 20"])
+        RS -->|"Hacer otra"| R
+    end
+    subgraph ADM["Panel de administración (requiere JWT)"]
+        L["/admin/login Login"] -->|"credenciales válidas"| D["/admin Resumen"]
+        D --> RV["/admin/reservas Reservas"]
+        D --> OP["/admin/opiniones Opiniones"]
+        D --> M["/admin/mesas Mesas (solo ADMIN)"]
+        RV -->|"Gestionar"| DT["/admin/reservas/:id Detalle"]
+        D -->|"Pendiente / hoy"| DT
+        DT --> RV
+    end
+    I -->|"Acceso personal"| L
+    D -->|"Salir"| L
+    G{{"authGuard"}} -.-> D
+    G2{{"authGuard + rol ADMIN"}} -.-> M

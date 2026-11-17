@@ -20,7 +20,7 @@ public class MesaBootstrapConfig {
                 Mesa m = new Mesa();
                 m.setNumero(i);
                 m.setCapacidad(i <= 6 ? 4 : 6);
-                m.setZona(i <= 6 ? "Salon" : "Terraza");
+                m.setZona(i <= 6 ? "Salón" : "Terraza");
                 mesaRepository.save(m);
             }
         };

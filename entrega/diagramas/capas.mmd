@@ -1,0 +1,86 @@
+classDiagram
+    direction TB
+    class ReservaController {
+        <<RestController>>
+        +crear(ReservaRequest) ResponseEntity
+        +listar(String q) List~ReservaResponse~
+        +stats() ReservaStats
+        +cambiarEstado(Long, CambioEstadoRequest) ReservaResponse
+        +eliminar(Long) ResponseEntity
+    }
+    class GestionReservaController {
+        <<RestController>>
+        +detalle(Long) ReservaDetalleResponse
+        +asignarMesas(Long, AsignarMesasRequest)
+        +registrarPago(Long, PagoRequest)
+        +cambiarEstadoPago(Long, CambioEstadoPagoRequest)
+        +registrarLlegada(Long, AtencionRequest)
+        +registrarSalida(Long)
+    }
+    class MesaController {
+        <<RestController>>
+        +listar() List~MesaResponse~
+        +crear(MesaRequest)
+        +actualizar(Long, MesaRequest)
+        +eliminar(Long)
+    }
+    class OpinionController {
+        <<RestController>>
+        +guardar(OpinionRequest)
+        +listar(String q)
+        +eliminar(Long)
+    }
+    class AuthController {
+        <<RestController>>
+        +login(LoginRequest) AuthTokenResponse
+    }
+    class ReservaService {
+        <<Service>>
+        +crear(ReservaRequest) ReservaCreadaResponse
+        +cambiarEstado(Long, EstadoReserva)
+        +expirarPendientesVencidas() int
+        +calcularStats() ReservaStats
+    }
+    class GestionReservaService {
+        <<Service>>
+        +asignarMesas(Long, AsignarMesasRequest)
+        +registrarPago(Long, PagoRequest)
+        +cambiarEstadoPago(Long, EstadoPago)
+        +registrarLlegada(Long, AtencionRequest)
+        +registrarSalida(Long)
+    }
+    class MesaService {
+        <<Service>>
+    }
+    class OpinionService {
+        <<Service>>
+    }
+    class HistorialService {
+        <<Service>>
+        +registrar(Reserva, EstadoReserva, EstadoReserva, String)
+    }
+    class AuthenticationService {
+        <<Service>>
+        +autenticar(LoginRequest) AuthTokenResponse
+    }
+    class ReservaScheduler {
+        <<Component>>
+        +expirar() void
+    }
+    class JpaRepository~T,ID~ {
+        <<interface>>
+    }
+    ReservaController --> ReservaService
+    GestionReservaController --> GestionReservaService
+    MesaController --> MesaService
+    OpinionController --> OpinionService
+    AuthController --> AuthenticationService
+    ReservaScheduler --> ReservaService
+    ReservaService --> HistorialService
+    GestionReservaService --> HistorialService
+    ReservaService ..> JpaRepository : ReservaRepository
+    GestionReservaService ..> JpaRepository : Mesa/Pago/Atencion repos
+    MesaService ..> JpaRepository : MesaRepository
+    OpinionService ..> JpaRepository : OpinionRepository
+    HistorialService ..> JpaRepository : HistorialRepository
+    AuthenticationService ..> JpaRepository : UsuarioAdminRepository

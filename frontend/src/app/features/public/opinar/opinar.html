@@ -1,8 +1,8 @@
 <section class="container py-5 page-enter">
   <div class="row justify-content-center">
     <div class="col-lg-7">
-      <h1 class="section-title">Tu opinion nos importa</h1>
-      <p class="text-secondary">Cuentanos como te fue en tu visita.</p>
+      <h1 class="section-title">Tu opinión nos importa</h1>
+      <p class="text-secondary">Cuéntanos cómo te fue en tu visita.</p>
 
       @if (enviado()) {
         <div class="alert alert-success d-flex align-items-center gap-2">
@@ -30,7 +30,7 @@
           </div>
           <button class="btn btn-primary w-100" type="submit" [disabled]="enviando()">
             @if (enviando()) { <span class="spinner-border spinner-border-sm me-2"></span> }
-            Enviar opinion
+            Enviar opinión
           </button>
         </form>
       }
