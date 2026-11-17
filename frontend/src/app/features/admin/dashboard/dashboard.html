@@ -1,0 +1,50 @@
+<div class="page-enter">
+  <h1 class="h3 fw-bold mb-1">Hola, {{ auth.sesion()?.usuario }}</h1>
+  <p class="text-secondary mb-4">Resumen del dia en el restaurante.</p>
+
+  @if (cargando()) {
+    <div class="text-center py-5"><div class="spinner-border text-primary"></div></div>
+  } @else {
+    <div class="row g-3 mb-4">
+      <div class="col-sm-4"><app-stat-card titulo="Reservas pendientes" [valor]="stats()?.pendientes ?? 0" icono="bi-hourglass-split" color="warning" /></div>
+      <div class="col-sm-4"><app-stat-card titulo="Confirmadas para hoy" [valor]="stats()?.confirmadasHoy ?? 0" icono="bi-calendar-check" color="success" /></div>
+      <div class="col-sm-4"><app-stat-card titulo="Opiniones recibidas" [valor]="stats()?.opiniones ?? 0" icono="bi-chat-heart" color="info" /></div>
+    </div>
+
+    <div class="row g-3">
+      <div class="col-lg-7">
+        <div class="card card-soft h-100">
+          <div class="card-header bg-white border-0 pt-3 fw-semibold">Reservas de hoy</div>
+          <ul class="list-group list-group-flush">
+            @for (r of hoy(); track r.id) {
+              <a class="list-group-item list-group-item-action d-flex align-items-center gap-3" [routerLink]="['/admin/reservas', r.id]">
+                <span class="fw-bold text-primary">{{ r.hora.slice(0, 5) }}</span>
+                <span class="flex-grow-1">{{ r.nombres }} {{ r.apellidos }} <small class="text-secondary">· {{ r.personas }} pers.</small></span>
+                <app-estado-badge [estado]="r.estado" />
+              </a>
+            } @empty {
+              <li class="list-group-item text-secondary">No hay reservas para hoy.</li>
+            }
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="card card-soft h-100">
+          <div class="card-header bg-white border-0 pt-3 fw-semibold d-flex justify-content-between">
+            Pendientes de adelanto <a routerLink="/admin/reservas" class="small">Ver todas</a>
+          </div>
+          <ul class="list-group list-group-flush">
+            @for (r of pendientes(); track r.id) {
+              <a class="list-group-item list-group-item-action" [routerLink]="['/admin/reservas', r.id]">
+                <div class="fw-semibold">{{ r.nombres }} {{ r.apellidos }}</div>
+                <small class="text-secondary">{{ r.fecha }} · {{ r.hora.slice(0, 5) }} · {{ r.telefono }}</small>
+              </a>
+            } @empty {
+              <li class="list-group-item text-secondary">Sin pendientes.</li>
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  }
+</div>

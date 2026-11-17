@@ -1,0 +1,50 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-marino sticky-top shadow-sm">
+  <div class="container">
+    <a class="navbar-brand fw-bold" routerLink="/" (click)="cerrarMenu()">
+      <i class="bi bi-water me-1"></i> Rinconcito Marino
+    </a>
+    <button class="navbar-toggler border-0" type="button" aria-label="Abrir menu" (click)="alternarMenu()">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" [class.show]="menuAbierto()">
+      <ul class="navbar-nav ms-auto align-items-md-center gap-md-2">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="cerrarMenu()">Inicio</a>
+        </li>
+        <li class="nav-item"><a class="nav-link" routerLink="/carta" routerLinkActive="active" (click)="cerrarMenu()">Carta</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/opinar" routerLinkActive="active" (click)="cerrarMenu()">Opiniones</a></li>
+        <li class="nav-item mt-2 mt-md-0">
+          <a class="btn btn-coral btn-sm px-3" routerLink="/reservar" (click)="cerrarMenu()">
+            <i class="bi bi-calendar-check me-1"></i>Reservar
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main class="contenido">
+  <router-outlet />
+</main>
+
+<footer class="pie text-white-50">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-md-4">
+        <h5 class="text-white fw-bold"><i class="bi bi-water me-1"></i> Rinconcito Marino</h5>
+        <p class="small mb-0">Cevicheria con el sabor fresco del mar peruano. Reserva tu mesa en linea.</p>
+      </div>
+      <div class="col-6 col-md-4">
+        <h6 class="text-white">Horario</h6>
+        <p class="small mb-0">Lunes a domingo<br>11:00 a.m. - 5:00 p.m.</p>
+      </div>
+      <div class="col-6 col-md-4">
+        <h6 class="text-white">Contacto</h6>
+        <p class="small mb-1"><i class="bi bi-whatsapp me-1"></i> 910 872 665</p>
+        <a class="small link-light" routerLink="/admin/login"><i class="bi bi-lock me-1"></i>Acceso personal</a>
+      </div>
+    </div>
+    <hr class="border-secondary">
+    <p class="small text-center mb-0">&copy; {{ anio }} Rinconcito Marino. Todos los derechos reservados.</p>
+  </div>
+</footer>

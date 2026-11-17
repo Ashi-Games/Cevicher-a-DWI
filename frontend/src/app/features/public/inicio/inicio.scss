@@ -1,0 +1,26 @@
+@use 'variables' as *;
+
+.hero {
+  background: radial-gradient(circle at 80% 20%, rgba($turquesa, .45), transparent 45%),
+              linear-gradient(135deg, $marino, $marino-claro);
+}
+
+.icono-hero { font-size: 12rem; opacity: .25; }
+
+.pasos li {
+  display: flex;
+  gap: .8rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.num {
+  flex: 0 0 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  background: $coral;
+  color: #fff;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+}

@@ -1,0 +1,69 @@
+// ===== Tema: variables propias aplicadas a Bootstrap (SASS) =====
+@import 'variables';
+
+$primary: $marino;
+$secondary: $marino-claro;
+$info: $turquesa;
+$danger: #dc3545;
+$warning: #f4a261;
+$body-color: $tinta;
+$font-family-sans-serif: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+$border-radius: .6rem;
+$border-radius-lg: $radio;
+$btn-padding-x: 1.1rem;
+$enable-shadows: false;
+
+@import 'bootstrap/scss/bootstrap';
+
+// ===== Estilos globales =====
+body { background: #f6f9fb; min-height: 100vh; }
+
+.btn-coral {
+  @include button-variant($coral, $coral, $color: #fff, $hover-background: darken($coral, 8%), $hover-border: darken($coral, 8%));
+}
+
+.text-coral { color: $coral !important; }
+.bg-marino { background: $marino !important; }
+.bg-arena { background: $arena !important; }
+
+.card-soft {
+  border: 0;
+  border-radius: $radio;
+  box-shadow: $sombra;
+}
+
+.section-title {
+  font-weight: 700;
+  color: $marino;
+  &::after {
+    content: '';
+    display: block;
+    width: 3rem;
+    height: .25rem;
+    margin-top: .4rem;
+    border-radius: 1rem;
+    background: $coral;
+  }
+  &.text-center::after { margin-inline: auto; }
+}
+
+.form-label { font-weight: 500; font-size: .9rem; }
+
+.table > :not(caption) > * > * { vertical-align: middle; }
+
+// Etiquetas de estado de reserva / pago
+.estado {
+  display: inline-block;
+  padding: .25rem .7rem;
+  border-radius: 2rem;
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+  &.PENDIENTE { background: #fff3cd; color: #8a6100; }
+  &.CONFIRMADO, &.PAGADO { background: #d1f2e4; color: #0f6b45; }
+  &.RECHAZADO { background: #f8d7da; color: #8b1c25; }
+  &.EXPIRADO { background: #e2e3e5; color: #41464b; }
+}
+
+.page-enter { animation: entrar .25s ease-out; }
+@keyframes entrar { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }

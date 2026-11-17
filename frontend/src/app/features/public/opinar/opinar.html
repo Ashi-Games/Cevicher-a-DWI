@@ -1,0 +1,39 @@
+<section class="container py-5 page-enter">
+  <div class="row justify-content-center">
+    <div class="col-lg-7">
+      <h1 class="section-title">Tu opinion nos importa</h1>
+      <p class="text-secondary">Cuentanos como te fue en tu visita.</p>
+
+      @if (enviado()) {
+        <div class="alert alert-success d-flex align-items-center gap-2">
+          <i class="bi bi-emoji-smile fs-4"></i>
+          <span>Recibimos tu comentario. ¡Gracias por ayudarnos a mejorar!</span>
+          <button type="button" class="btn btn-sm btn-outline-success ms-auto" (click)="enviado.set(false)">Escribir otra</button>
+        </div>
+      } @else {
+        <form class="card card-soft p-4" [formGroup]="form" (ngSubmit)="enviar()" novalidate>
+          <div class="mb-3">
+            <label class="form-label" for="nombres">Nombre</label>
+            <input id="nombres" class="form-control" formControlName="nombres" [class.is-invalid]="invalido('nombres')">
+            <app-field-error [control]="form.get('nombres')" />
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="correo">Correo</label>
+            <input id="correo" type="email" class="form-control" formControlName="correo" [class.is-invalid]="invalido('correo')">
+            <app-field-error [control]="form.get('correo')" />
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="comentario">Comentario</label>
+            <textarea id="comentario" rows="5" class="form-control" formControlName="comentario" [class.is-invalid]="invalido('comentario')"></textarea>
+            <div class="form-text text-end">{{ form.controls.comentario.value.length }}/600</div>
+            <app-field-error [control]="form.get('comentario')" />
+          </div>
+          <button class="btn btn-primary w-100" type="submit" [disabled]="enviando()">
+            @if (enviando()) { <span class="spinner-border spinner-border-sm me-2"></span> }
+            Enviar opinion
+          </button>
+        </form>
+      }
+    </div>
+  </div>
+</section>

@@ -9,6 +9,7 @@ import com.rinconcito.marino.repository.OpinionRepository;
 import com.rinconcito.marino.repository.ReservaRepository;
 import jakarta.persistence.criteria.Predicate;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,10 @@ public class ReservaService {
 
     private final ReservaRepository reservaRepository;
     private final OpinionRepository opinionRepository;
+
+    /** Opcional para que las pruebas unitarias existentes no lo requieran. */
+    @Autowired(required = false)
+    private HistorialService historialService;
 
     @Value("${app.restaurant.whatsapp-number:51910872665}")
     private String whatsappNumber;
@@ -85,8 +90,13 @@ public class ReservaService {
         if (reserva.getEstado() == EstadoReserva.EXPIRADO && estado == EstadoReserva.CONFIRMADO) {
             throw new ReglaNegocioException("Una reserva expirada no puede confirmarse");
         }
+        EstadoReserva anterior = reserva.getEstado();
         reserva.setEstado(estado);
-        return ReservaResponse.from(reservaRepository.save(reserva));
+        Reserva guardada = reservaRepository.save(reserva);
+        if (historialService != null) {
+            historialService.registrar(guardada, anterior, estado, "Cambio manual");
+        }
+        return ReservaResponse.from(guardada);
     }
 
     @Transactional
@@ -104,6 +114,10 @@ public class ReservaService {
                 .findByEstadoAndFechaRegistroBefore(EstadoReserva.PENDIENTE, limite);
         vencidas.forEach(r -> r.setEstado(EstadoReserva.EXPIRADO));
         reservaRepository.saveAll(vencidas);
+        if (historialService != null) {
+            vencidas.forEach(r -> historialService.registrar(r, EstadoReserva.PENDIENTE,
+                    EstadoReserva.EXPIRADO, "Sin adelanto en 30 minutos"));
+        }
         return vencidas.size();
     }
 

@@ -1,0 +1,35 @@
+@use 'variables' as *;
+
+$ancho: 240px;
+
+.lateral {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: $ancho;
+  display: flex;
+  flex-direction: column;
+  z-index: 1040;
+  transition: transform .25s ease;
+
+  .nav-link {
+    color: rgba(#fff, .8);
+    border-radius: .6rem;
+    margin-bottom: .2rem;
+    &:hover { background: rgba(#fff, .08); color: #fff; }
+    &.activo { background: $coral; color: #fff; }
+  }
+
+  @include movil {
+    top: 56px;
+    transform: translateX(-100%);
+    &.abierto { transform: none; }
+  }
+}
+
+.barra-movil { height: 56px; position: sticky; top: 0; z-index: 1041; }
+.velo { position: fixed; inset: 56px 0 0; background: rgba(0, 0, 0, .4); z-index: 1030; }
+
+.principal {
+  @include escritorio { margin-left: $ancho; }
+  min-height: 100vh;
+}

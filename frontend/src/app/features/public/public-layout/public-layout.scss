@@ -1,0 +1,5 @@
+@use 'variables' as *;
+
+.contenido { min-height: calc(100vh - 56px); }
+.pie { background: darken($marino, 8%); }
+.navbar-collapse.show { padding-bottom: .75rem; }

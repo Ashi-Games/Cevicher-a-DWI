@@ -1,0 +1,85 @@
+<section class="container py-5 page-enter">
+  @if (creada(); as r) {
+    <div class="row justify-content-center">
+      <div class="col-lg-7">
+        <app-resumen-reserva [datos]="r" (nueva)="nuevaReserva()" />
+      </div>
+    </div>
+  } @else {
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <h1 class="section-title">Reserva tu mesa</h1>
+        <p class="text-secondary">Completa tus datos y te enviaremos un enlace de WhatsApp para coordinar el adelanto.</p>
+        <ul class="list-unstyled small">
+          <li class="mb-2"><i class="bi bi-cash-coin text-primary me-2"></i>Adelanto de S/ 20 (se descuenta de tu consumo)</li>
+          <li class="mb-2"><i class="bi bi-hourglass-split text-primary me-2"></i>Sin adelanto en 30 minutos, la reserva expira</li>
+          <li class="mb-2"><i class="bi bi-people text-primary me-2"></i>Grupos de mas de 20 personas: escribenos por WhatsApp</li>
+        </ul>
+      </div>
+
+      <div class="col-lg-8">
+        <form class="card card-soft p-4" [formGroup]="form" (ngSubmit)="enviar()" novalidate>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label" for="nombres">Nombres</label>
+              <input id="nombres" class="form-control" formControlName="nombres" autocomplete="given-name" [class.is-invalid]="invalido('nombres')">
+              <app-field-error [control]="form.get('nombres')" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" for="apellidos">Apellidos</label>
+              <input id="apellidos" class="form-control" formControlName="apellidos" autocomplete="family-name" [class.is-invalid]="invalido('apellidos')">
+              <app-field-error [control]="form.get('apellidos')" />
+            </div>
+            <div class="col-6 col-md-4">
+              <label class="form-label" for="dni">DNI</label>
+              <input id="dni" class="form-control" formControlName="dni" inputmode="numeric" maxlength="8" [class.is-invalid]="invalido('dni')">
+              <app-field-error [control]="form.get('dni')" [mensajes]="{ pattern: 'El DNI debe tener 8 digitos' }" />
+            </div>
+            <div class="col-6 col-md-2">
+              <label class="form-label" for="edad">Edad</label>
+              <input id="edad" type="number" class="form-control" formControlName="edad" [class.is-invalid]="invalido('edad')">
+              <app-field-error [control]="form.get('edad')" [mensajes]="{ min: 'Debes ser mayor de edad' }" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" for="telefono">Celular</label>
+              <input id="telefono" type="tel" class="form-control" formControlName="telefono" inputmode="numeric" maxlength="9" [class.is-invalid]="invalido('telefono')">
+              <app-field-error [control]="form.get('telefono')" [mensajes]="{ pattern: 'El celular debe tener 9 digitos' }" />
+            </div>
+            <div class="col-12">
+              <label class="form-label" for="email">Correo</label>
+              <input id="email" type="email" class="form-control" formControlName="email" autocomplete="email" [class.is-invalid]="invalido('email')">
+              <app-field-error [control]="form.get('email')" />
+            </div>
+            <div class="col-md-4">
+              <label class="form-label" for="fecha">Fecha</label>
+              <input id="fecha" type="date" class="form-control" formControlName="fecha" [min]="hoy" [class.is-invalid]="invalido('fecha')">
+              <app-field-error [control]="form.get('fecha')" />
+            </div>
+            <div class="col-6 col-md-4">
+              <label class="form-label" for="hora">Hora</label>
+              <select id="hora" class="form-select" formControlName="hora" [class.is-invalid]="invalido('hora')">
+                <option value="" disabled>Elige</option>
+                @for (h of horas; track h) { <option [value]="h">{{ h }}</option> }
+              </select>
+              <app-field-error [control]="form.get('hora')" />
+            </div>
+            <div class="col-6 col-md-4">
+              <label class="form-label" for="personas">Personas</label>
+              <input id="personas" type="number" class="form-control" formControlName="personas" min="1" max="20" [class.is-invalid]="invalido('personas')">
+              <app-field-error [control]="form.get('personas')" [mensajes]="{ max: 'Mas de 20 personas: contactanos por WhatsApp' }" />
+            </div>
+            @if (form.hasError('fechaPasada') && form.get('hora')?.touched) {
+              <div class="col-12"><div class="alert alert-warning py-2 mb-0">La fecha y hora elegidas ya pasaron.</div></div>
+            }
+            <div class="col-12 d-grid">
+              <button class="btn btn-coral btn-lg" type="submit" [disabled]="enviando()">
+                @if (enviando()) { <span class="spinner-border spinner-border-sm me-2"></span>Enviando... }
+                @else { <i class="bi bi-send me-2"></i>Reservar }
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  }
+</section>
